@@ -9,7 +9,7 @@ namespace Storybranch.Components
 	public class MapToolBarComponentBase : ComponentBase
 	{
 		// --- Parameters ---
-    [Parameter] EventCallback OnPlacePinDelegate {get; set;}
+    [Parameter] public EventCallback OnPlacePinDelegate {get; set;}
 
 	
 		// --- Injects ---
