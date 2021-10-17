@@ -14,33 +14,33 @@ namespace Storybranch.Components
 		[Parameter] public float DefaultZoom { get; set; } = 2.0f;
 
 		// --- Injects ---
-		[Inject] protected IJSRuntime _jsRuntime { get; set; }
+		[Inject] protected IJSRuntime JsRuntime { get; set; }
 
 		// --- Properties ---
-		protected Map _map { get; set; }
-		private Circle _circle { get; set; }
-		private LatLng _startAt { get; set; } = new LatLng(47.5574007f, 16.3918687f);
+		protected Map Map { get; set; }
+		private Circle Circle { get; set; }
+		private LatLng StartAt { get; set; } = new LatLng(47.5574007f, 16.3918687f);
 
 		// --- ComponentBase Overrides ---
 		protected override void OnInitialized()
 		{
-			_map = new Map(_jsRuntime)
+			Map = new Map(JsRuntime)
 			{
-				Center = _startAt,
+				Center = StartAt,
 				Zoom = DefaultZoom,
 				MaxZoom = MaxZoom,
 				MinZoom = MinZoom
 			};
 
-			_map.OnInitialized += () =>
+			Map.OnInitialized += () =>
 			{
-				_map.AddLayer(new TileLayer
+				Map.AddLayer(new TileLayer
 				{
 					UrlTemplate = "http://battosai.de/jedaya/map/tiles/{z}/{x}/{y}.jpg",
 					Attribution = "...",
 				});
 
-				_map.AddLayer(new Polygon
+				Map.AddLayer(new Polygon
 				{
 					Shape = new[]
 					{
@@ -58,24 +58,24 @@ namespace Storybranch.Components
 					}
 				});
 
-				_circle = new Circle
+				Circle = new Circle
 				{
 					Position = new LatLng(10f, 5f),
 					Radius = 10f
 				};
-				_map.AddLayer(_circle);
+				Map.AddLayer(Circle);
 			};
 		}
 
 		// --- Methods ---
 		private void ZoomMap()
 		{
-			_map.FitBounds(new PointF(45.943f, 24.967f), new PointF(46.943f, 25.967f), maxZoom: 5f);
+			Map.FitBounds(new PointF(45.943f, 24.967f), new PointF(46.943f, 25.967f), maxZoom: 5f);
 		}
 
 		private void PanToSomewhere()
 		{
-			_map.PanTo(new PointF(40.713185f, -74.0072333f), animate: true, duration: 10f);
+			Map.PanTo(new PointF(40.713185f, -74.0072333f), animate: true, duration: 10f);
 		}
 	}
 }
