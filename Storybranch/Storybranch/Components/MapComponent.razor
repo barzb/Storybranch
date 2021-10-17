@@ -1,6 +1,6 @@
 ﻿@inherits MapComponentBase
-@using BlazorLeaflet.Models
+@inject IJSRuntime _jsRuntime
 
-<div id="mapContainer" style="width: 500px; height: 500px;">
-    <LeafletMap Map="_map"/>
+<div style="height: 800px; width: 800px;">
+    <LeafletMap Map="_map" />
 </div>
